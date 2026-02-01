@@ -5,21 +5,19 @@ import { View, StyleSheet } from "react-native";
 import { Colors } from "@/constants/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
-import { Header } from "@/components/header";
 
 const MyTheme = {
   ...DarkTheme,
-  colors: {
-    ...DarkTheme.colors,
-    background: Colors.background,
-    card: Colors.background,
-  },
+  // colors: {
+  //   ...DarkTheme.colors,
+  //   background: Colors.background,
+  //   card: Colors.background,
+  // },
 };
 
 export default function RootLayout() {
   return (
     <ThemeProvider value={MyTheme}>
-      <Header />
       <SafeAreaView style={styles.container}>
         <Stack
           screenOptions={{
@@ -29,7 +27,6 @@ export default function RootLayout() {
         />
         <StatusBar style="light" />
       </SafeAreaView>
-
     </ThemeProvider>
   );
 }
@@ -37,6 +34,6 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background, // 앱 전체 배경
+    backgroundColor: Colors.background,
   },
 });

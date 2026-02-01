@@ -1,11 +1,11 @@
-
-import { Screen } from '@/components/screen';
-import { StyleSheet } from 'react-native';
+import { Screen } from "@/components/screen";
+import { Colors } from "@/constants/theme";
+import { StyleSheet } from "react-native";
 import { Text, View } from "react-native";
 
 export default function RecordingsScreen() {
   return (
-    <Screen>
+    <Screen variant="main" >
       <Text style={styles.text}>녹음페이지 입니다</Text>
     </Screen>
   );
@@ -13,7 +13,7 @@ export default function RecordingsScreen() {
 
 const styles = StyleSheet.create({
   text: {
-    color: 'white',
+    color: Colors.white,
     fontSize: 24,
     marginTop: 100,
   },

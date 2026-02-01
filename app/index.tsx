@@ -15,10 +15,8 @@ export default function Index() {
       console.log('token:', token);
 
       if (token) {
-        console.log('tabs로 이동');
         router.replace('/(tabs)');
       } else {
-        console.log('login으로 이동');
         router.replace('/(auth)/login');
       }
 
