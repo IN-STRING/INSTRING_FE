@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { typography } from "@/assets/fonts/typography";
 
 interface HeaderProps {
-  variant: "main" | "auth";
+  variant: "main" | "auth" | "success";
   title?: string;
   showBack?: boolean;
 }
@@ -57,9 +57,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center", 
-    paddingHorizontal: 16,
-    paddingLeft: 20,
-    paddingRight:20,
+    paddingHorizontal: 26,
   },
 
   mainHeader: {
@@ -84,8 +82,8 @@ const styles = StyleSheet.create({
     width: 40,
   },
   titleBox: {
-    paddingTop: 40,
-    marginHorizontal: 40,
+    paddingTop: 25,
+    marginHorizontal: 34,
   },
   title: {
     ...typography.bold,

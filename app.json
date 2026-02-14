@@ -16,7 +16,7 @@
       "predictiveBackGestureEnabled": false
     },
     "androidNavigationBar": {
-      "visible": "visible", 
+      "visible": "visible",
       "backgroundColor": "#121212",
       "barStyle": "light-content"
     },
@@ -29,10 +29,8 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/logo.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
           "backgroundColor": "#000000",
+          "resizeMode": "contain",
           "dark": {
             "backgroundColor": "#000000"
           }

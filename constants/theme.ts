@@ -10,4 +10,5 @@ export const Colors = {
   semi_bad: '#FFE500',
   middle: '#7B61A0',
   danger: '#C3C3C3',
+  error: '#c42727',
 };

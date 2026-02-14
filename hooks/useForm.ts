@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Text } from "react-native";
 
 type Errors<T> = Partial<Record<keyof T, string>>;
 type Touched<T> = Partial<Record<keyof T, boolean>>;
@@ -16,47 +15,48 @@ export function useForm<T extends Record<string, any>>({
   const [values, setValues] = useState<T>(initialValues);
   const [touched, setTouched] = useState<Touched<T>>({});
   const [errors, setErrors] = useState<Errors<T>>({});
-;
+
   const handleChange = (name: keyof T, value: string) => {
-    setValues(prev => ({
-      ...prev,
+    const nextValues = {
+      ...values,
       [name]: value,
-    }));
+    };
+
+    setValues(nextValues);
+
+    if (validate) {
+      const validationErrors = validate(nextValues);
+      setErrors(validationErrors);
+    }
   };
+
 
   const handleBlur = (name: keyof T) => {
     setTouched(prev => ({
       ...prev,
       [name]: true,
     }));
-
-    if (validate) {
-      const validationErrors = validate(values)
-      setErrors(validationErrors)
-    }
   };
+
 
   const handleSubmit = (onSubmit: (values: T) => void) => {
     if (validate) {
-      const validationErrors = validate(values)
-      setErrors(validationErrors)
-      console.log(values.username)
-      console.log(values.password)
-      console.log(values.email)
-      
+      const validationErrors = validate(values);
+      setErrors(validationErrors);
+
       if (Object.keys(validationErrors).length > 0) {
-        return
+        return;
       }
     }
 
-    onSubmit(values)
-  }
+    onSubmit(values);
+  };
 
   const getTextInputProps = (name: keyof T) => ({
     value: values[name],
     onChangeText: (text: string) => handleChange(name, text),
     onBlur: () => handleBlur(name),
-  })
+  });
 
   return {
     values,
@@ -64,5 +64,5 @@ export function useForm<T extends Record<string, any>>({
     touched,
     handleSubmit,
     getTextInputProps,
-  }
+  };
 }

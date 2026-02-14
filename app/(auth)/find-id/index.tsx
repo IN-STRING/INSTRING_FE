@@ -1,40 +1,41 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { Text, View, Button } from "react-native";
-import { setToken, getToken } from "@/services/authStorage";
-import { useRouter } from "expo-router";
-import { Screen } from "@/components/screen";
-import { Colors } from "@/constants/theme";
-import CustomInput from "@/components/TextInput";
-import { useForm } from "@/hooks/useForm";
 import { typography } from "@/assets/fonts/typography";
-import { AuthLinks } from "@/components/AuthLinks";
 import { SubmitButton } from "@/components/Button";
+import { Screen } from "@/components/screen";
+import CustomInput from "@/components/TextInput";
+import { Colors } from "@/constants/theme";
+import { useForm } from "@/hooks/useForm";
+import { useRouter } from "expo-router";
+import { useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 
-export default function MypageScreen() {
+export default function SignUpStep1Screen() {
   const router = useRouter();
+
+  const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
   const form = useForm({
     initialValues: {
-      password: "",
       email: "",
+      verify: "",
     },
     validate: (values) => {
       const errors: any = {}
 
-      if (!values.password) errors.password = "비밀번호 필수"
-      if (!values.email) errors.email = "이메일 필수"
+      if (!values.email || !EMAIL_REGEX.test(values.email)) {errors.email = "올바른 이메일 형식이 아닙니다"}
+      // if (!values.verify) {errors.verify = "인증번호를 입력해주세요"}
 
       return errors
     },
   });
-  
+
   return (
-    <Screen variant="auth" title="로그인" >
+    <Screen variant="auth" title="아이디 찾기" showBack >
       <View style={styles.inputWrapper}>
         <CustomInput
           label="email"
           title="이메일"
-          showError={form.errors && form.touched.email}
+          isSend
+          showError={!!form.errors.email && form.touched.email}
           error={form.errors.email}
           touched={form.touched.email}
           placeholder="이메일을 입력하세요"
@@ -42,32 +43,25 @@ export default function MypageScreen() {
           autoCapitalize="none"
           keyboardType="email-address"
         />
-
         <CustomInput
-          label="password"
-          title="비밀번호"
-          isPassword
-          error={form.errors.password}
-          touched={form.touched.password}
-          placeholder="비밀번호를 입력하세요"
-          {...form.getTextInputProps("password")}
+          label="verify"
+          title="인증번호"
+          showError={!form.values.verify && form.touched.verify}
+          error={form.errors.verify}
+          touched={form.touched.verify}
+          placeholder="이메일을 먼저 입력해주세요"
+          {...form.getTextInputProps("verify")}
           autoCapitalize="none"
-          textContentType="password"
-        />
-
-        <AuthLinks />
-        
-        <SubmitButton 
-          label="로그인"
-          onPress={() =>
-            form.handleSubmit(async () => {
-              await setToken("1");
-              router.replace("/(tabs)");
-            })
-          } 
-          disabled={!form.values.email || !form.values.password ? true : false}
+          keyboardType="numeric"
         />
       </View>
+      <SubmitButton 
+        label="다음 단계"
+        onPress={() => {
+          router.push("/(auth)/find-id/success");
+        }} 
+        disabled={(JSON.stringify(form.errors) !== '{}') || !form.values.email || !form.values.verify ? true : false}
+      />
     </Screen>
   );
 }
@@ -77,8 +71,6 @@ const styles = StyleSheet.create({
   inputWrapper: {
     marginTop: 20,
     flex: 1,
-    width: '100%',
-    alignItems: "stretch", 
     color: Colors.white,
     borderColor: Colors.white,
   },
@@ -110,3 +102,4 @@ const styles = StyleSheet.create({
     bottom: 45,
   },
 });
+

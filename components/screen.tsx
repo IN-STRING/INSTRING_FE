@@ -10,7 +10,7 @@ export function Screen({
   showBack,
 }: {
   children: React.ReactNode;
-  variant: "auth" | "main";
+  variant: "auth" | "main" | "success";
   title?: string;
   showBack?: boolean;
 }) {
@@ -28,11 +28,12 @@ const styles = StyleSheet.create({
   safe: {
     flex: 1,
     backgroundColor: Colors.background,
+    // backgroundColor: Colors.container,
     margin: 0,
     padding: 0,
   },
   bg: {
     flex: 1,
-    marginHorizontal: 40,
+    marginHorizontal: 34,
   },
 });
