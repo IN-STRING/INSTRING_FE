@@ -1,13 +1,19 @@
 import { View, Text, StyleSheet } from "react-native";
 import { router } from "expo-router";
 import { Colors } from "@/constants/theme";
-import { Screen } from "@/components/screen";
+import { Screen } from "@/components/Screen";
 import { SubmitButton } from "@/components/Button";
 import { typography } from "@/assets/fonts/typography";
 import { Image } from "expo-image";
 
+/**
+ * Render the survey completion screen with a success illustration and a call-to-action button.
+ *
+ * The displayed button labeled "시작하기" navigates to the app's root route when pressed.
+ *
+ * @returns The JSX element for the survey success screen.
+ */
 export default function Success() {
-
   const handleNext = () => {
     router.replace("/");
   };
@@ -16,20 +22,19 @@ export default function Success() {
     <Screen>
       <View style={styles.container}>
         <Text style={styles.title}>설문에 참여해주셔서 감사해요!</Text>
-        <Text style={styles.subtitle}>저희의 서비스를 마음껏 이용해주세요!</Text>
+        <Text style={styles.subtitle}>
+          저희의 서비스를 마음껏 이용해주세요!
+        </Text>
 
         <View style={styles.wrapper}>
           <Image
-                  source={require("@/assets/images/survey/success.svg")} 
-                  style={styles.image}
-                  contentFit="contain" 
-                />
+            source={require("@/assets/images/survey/success.svg")}
+            style={styles.image}
+            contentFit="contain"
+          />
         </View>
 
-        <SubmitButton
-          label="시작하기"
-          onPress={handleNext} 
-        />
+        <SubmitButton label="시작하기" onPress={handleNext} />
       </View>
     </Screen>
   );
