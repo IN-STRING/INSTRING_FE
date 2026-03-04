@@ -4,7 +4,7 @@ import { router } from "expo-router";
 
 export default function resetPasswordSuccess() {
   return (
-    <Screen variant="success">
+    <Screen>
       <Success
         description="비밀번호 초기화가 완료 되었습니다"
         buttonText="로그인하러 가기"

@@ -31,7 +31,7 @@ export function SubmitButton({
 const styles = StyleSheet.create({
   button: {
     width: "100%",
-    height: 44,
+    height: 48,
     backgroundColor: Colors.white,
     borderRadius: 5,
     justifyContent: "center",

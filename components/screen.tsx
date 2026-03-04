@@ -10,7 +10,7 @@ export function Screen({
   showBack,
 }: {
   children: React.ReactNode;
-  variant: "auth" | "main" | "success";
+  variant?: "auth" | "main";
   title?: string;
   showBack?: boolean;
 }) {

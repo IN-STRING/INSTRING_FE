@@ -62,7 +62,7 @@ export default function MypageScreen() {
           onPress={() =>
             form.handleSubmit(async () => {
               await setToken("1");
-              router.replace("/(tabs)");
+              router.replace("/");
             })
           } 
           disabled={!form.values.email || !form.values.password ? true : false}

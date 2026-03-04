@@ -10,7 +10,19 @@ export default function Splash() {
       await new Promise(r => setTimeout(r, 1000));
 
       const token = await getToken();
-      router.replace(token ? "/(tabs)" : "/(auth)/login");
+      
+      if (!token) {
+        router.replace("/(auth)/login");
+        return;
+      }
+      // 설문 여부 서버에서 받아와야됨
+      const survey = true
+
+      if (survey) {
+        router.replace("/(tabs)");
+      } else {
+        router.replace("/(survey)/intro");
+      }
     }
 
     check()

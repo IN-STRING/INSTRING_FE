@@ -1,4 +1,3 @@
-import { Ionicons } from "@expo/vector-icons";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { SubmitButton } from "./Button";
 import { Colors } from "@/constants/theme";

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, Platform, StatusBar } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Colors } from "@/constants/theme";
@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { typography } from "@/assets/fonts/typography";
 
 interface HeaderProps {
-  variant: "main" | "auth" | "success";
+  variant?: "main" | "auth";
   title?: string;
   showBack?: boolean;
 }
@@ -14,6 +14,7 @@ interface HeaderProps {
 export const Header = ({ variant, title, showBack }: HeaderProps) => {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  const STATUS_BAR_HEIGHT = Platform.OS === 'android' ? (StatusBar.currentHeight || 48) : 50;
 
   return (
     <>
@@ -22,7 +23,7 @@ export const Header = ({ variant, title, showBack }: HeaderProps) => {
           styles.container,
           variant === "main" && styles.mainHeader,
           variant === "auth" && styles.authHeader,
-          { height: 80 + insets.top },
+          { height: 38 + STATUS_BAR_HEIGHT, paddingTop: 8},
         ]}
       >
         <View style={styles.left}>
@@ -58,12 +59,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center", 
     paddingHorizontal: 26,
+    // backgroundColor: Colors.error
   },
 
   mainHeader: {
     backgroundColor: Colors.background,
     borderBottomWidth: 1,
     borderBottomColor: Colors.sub_title,
+    
   },
 
   authHeader: {
