@@ -1,14 +1,9 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { Colors } from "@/constants/theme";
-import { Screen } from "@/components/screen";
+import { Screen } from "@/components/Screen";
 import { HumidityGauge } from "@/components/Humidity";
 import { ThermometerGauge } from "@/components/Thermometer";
 
@@ -37,7 +32,10 @@ export default function InstrumentDashboard() {
             <View style={[styles.triangle, { left: "90%" }]} />
             <View style={styles.stepBarContainer}>
               <View
-                style={[styles.stepBar, { backgroundColor: "#4CAF50", flex: 1 }]}
+                style={[
+                  styles.stepBar,
+                  { backgroundColor: "#4CAF50", flex: 1 },
+                ]}
               />
               <View
                 style={[
@@ -46,7 +44,10 @@ export default function InstrumentDashboard() {
                 ]}
               />
               <View
-                style={[styles.stepBar, { backgroundColor: "#F44336", flex: 1 }]}
+                style={[
+                  styles.stepBar,
+                  { backgroundColor: "#F44336", flex: 1 },
+                ]}
               />
             </View>
           </View>

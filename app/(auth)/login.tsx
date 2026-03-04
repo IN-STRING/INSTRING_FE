@@ -2,7 +2,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { Text, View, Button } from "react-native";
 import { setToken, getToken } from "@/services/authStorage";
 import { useRouter } from "expo-router";
-import { Screen } from "@/components/screen";
+import { Screen } from "@/components/Screen";
 import { Colors } from "@/constants/theme";
 import CustomInput from "@/components/TextInput";
 import { useForm } from "@/hooks/useForm";
@@ -19,17 +19,17 @@ export default function MypageScreen() {
       email: "",
     },
     validate: (values) => {
-      const errors: any = {}
+      const errors: any = {};
 
-      if (!values.password) errors.password = "비밀번호 필수"
-      if (!values.email) errors.email = "이메일 필수"
+      if (!values.password) errors.password = "비밀번호 필수";
+      if (!values.email) errors.email = "이메일 필수";
 
-      return errors
+      return errors;
     },
   });
-  
+
   return (
-    <Screen variant="auth" title="로그인" >
+    <Screen variant="auth" title="로그인">
       <View style={styles.inputWrapper}>
         <CustomInput
           label="email"
@@ -56,15 +56,15 @@ export default function MypageScreen() {
         />
 
         <AuthLinks />
-        
-        <SubmitButton 
+
+        <SubmitButton
           label="로그인"
           onPress={() =>
             form.handleSubmit(async () => {
               await setToken("1");
               router.replace("/");
             })
-          } 
+          }
           disabled={!form.values.email || !form.values.password ? true : false}
         />
       </View>
@@ -72,13 +72,12 @@ export default function MypageScreen() {
   );
 }
 
-
 const styles = StyleSheet.create({
   inputWrapper: {
     marginTop: 20,
     flex: 1,
-    width: '100%',
-    alignItems: "stretch", 
+    width: "100%",
+    alignItems: "stretch",
     color: Colors.white,
     borderColor: Colors.white,
   },

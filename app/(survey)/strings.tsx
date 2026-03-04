@@ -5,11 +5,11 @@ import { CustomOption } from "@/components/Option";
 import { useSurveyStore, stringsType } from "@/stores/useSurveyStore";
 import { SubmitButton } from "@/components/Button";
 import { typography } from "@/assets/fonts/typography";
-import { Screen } from "@/components/screen";
+import { Screen } from "@/components/Screen";
 
 export default function Strings() {
-  const strings = useSurveyStore(state => state.survey.strings);
-  const setSurvey = useSurveyStore(state => state.setSurvey);
+  const strings = useSurveyStore((state) => state.survey.strings);
+  const setSurvey = useSurveyStore((state) => state.setSurvey);
 
   const handleSelect = (value: stringsType) => {
     setSurvey({ strings: value });
@@ -26,23 +26,23 @@ export default function Strings() {
         <Text style={styles.subtitle}>줄 선택에 따라 변경주기 변경</Text>
 
         <View style={styles.wrapper}>
-          <CustomOption 
+          <CustomOption
             title="코팅줄"
             subTitle="엘릭서, 마틴, 옵티웹등"
             isSelected={strings === "coating"}
-            onPress={()=>handleSelect("coating")}
+            onPress={() => handleSelect("coating")}
           />
-          <CustomOption 
+          <CustomOption
             title="일반줄"
             subTitle="코팅줄이 아닌 모든 줄"
             isSelected={strings === "normal"}
-            onPress={()=>handleSelect("normal")}
+            onPress={() => handleSelect("normal")}
           />
         </View>
 
         <SubmitButton
           label="선택하기"
-          onPress={handleNext} 
+          onPress={handleNext}
           disabled={!strings}
         />
       </View>

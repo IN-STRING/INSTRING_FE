@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { router } from "expo-router";
 import { Colors } from "@/constants/theme";
 import { InstrumentType, useSurveyStore } from "@/stores/useSurveyStore";
-import { Screen } from "@/components/screen";
+import { Screen } from "@/components/Screen";
 import { SubmitButton } from "@/components/Button";
 import { typography } from "@/assets/fonts/typography";
 import { CustomCard } from "@/components/Card";
@@ -17,13 +17,13 @@ export const INSTRUMENTS = {
 const INSTRUMENT_IMAGES = {
   acoustic: require("@/assets/images/survey/acoustic.svg"),
   electric: require("@/assets/images/survey/electric.svg"),
-  classic: require("@/assets/images/survey/classic.svg"), 
+  classic: require("@/assets/images/survey/classic.svg"),
   bass: require("@/assets/images/survey/bass.svg"),
 } as const;
 
 export default function Instrument() {
-  const instrument = useSurveyStore(state => state.survey.instrument);
-  const setSurvey = useSurveyStore(state => state.setSurvey);
+  const instrument = useSurveyStore((state) => state.survey.instrument);
+  const setSurvey = useSurveyStore((state) => state.setSurvey);
 
   const handleSelect = (value: InstrumentType) => {
     setSurvey({ instrument: value });
@@ -41,13 +41,13 @@ export default function Instrument() {
 
         <View style={styles.wrapper}>
           <View style={styles.row}>
-            <CustomCard 
+            <CustomCard
               label={INSTRUMENTS.acoustic}
               source={INSTRUMENT_IMAGES.acoustic}
               isSelected={instrument === "acoustic"}
               onPress={() => handleSelect("acoustic")}
             />
-            <CustomCard 
+            <CustomCard
               label={INSTRUMENTS.electric}
               source={INSTRUMENT_IMAGES.electric}
               isSelected={instrument === "electric"}
@@ -55,13 +55,13 @@ export default function Instrument() {
             />
           </View>
           <View style={styles.row}>
-            <CustomCard 
+            <CustomCard
               label={INSTRUMENTS.classic}
               source={INSTRUMENT_IMAGES.classic}
               isSelected={instrument === "classic"}
               onPress={() => handleSelect("classic")}
             />
-            <CustomCard 
+            <CustomCard
               label={INSTRUMENTS.bass}
               source={INSTRUMENT_IMAGES.bass}
               isSelected={instrument === "bass"}
@@ -72,7 +72,7 @@ export default function Instrument() {
 
         <SubmitButton
           label="선택하기"
-          onPress={handleNext} 
+          onPress={handleNext}
           disabled={!instrument}
         />
       </View>

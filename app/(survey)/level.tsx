@@ -5,11 +5,11 @@ import { CustomOption } from "@/components/Option";
 import { useSurveyStore, LevelType } from "@/stores/useSurveyStore";
 import { SubmitButton } from "@/components/Button";
 import { typography } from "@/assets/fonts/typography";
-import { Screen } from "@/components/screen";
+import { Screen } from "@/components/Screen";
 
 export default function Level() {
-  const level = useSurveyStore(state => state.survey.level);
-  const setSurvey = useSurveyStore(state => state.setSurvey);
+  const level = useSurveyStore((state) => state.survey.level);
+  const setSurvey = useSurveyStore((state) => state.setSurvey);
 
   const handleSelect = (value: LevelType) => {
     setSurvey({ level: value });
@@ -26,43 +26,39 @@ export default function Level() {
         <Text style={styles.subtitle}>실력에 따라 수준에 맞는 곡 추천</Text>
 
         <View style={styles.wrapper}>
-          <CustomOption 
+          <CustomOption
             title="입문"
             subTitle="기타 1년차 이하에요"
             isSelected={level === "Beginner"}
-            onPress={()=>handleSelect("Beginner")}
+            onPress={() => handleSelect("Beginner")}
           />
-          <CustomOption 
+          <CustomOption
             title="초급"
             subTitle="기타 1년차 이상이에요"
             isSelected={level === "LowerIntermed"}
-            onPress={()=>handleSelect("LowerIntermed")}
+            onPress={() => handleSelect("LowerIntermed")}
           />
-          <CustomOption 
+          <CustomOption
             title="중급"
             subTitle="기타 2년차 이상이에요"
             isSelected={level === "Intermediate"}
-            onPress={()=>handleSelect("Intermediate")}
+            onPress={() => handleSelect("Intermediate")}
           />
-          <CustomOption 
+          <CustomOption
             title="고급"
             subTitle="기타 4년차 이상이에요"
             isSelected={level === "Advance"}
-            onPress={()=>handleSelect("Advance")}
+            onPress={() => handleSelect("Advance")}
           />
-          <CustomOption 
+          <CustomOption
             title="전문가"
             subTitle="기타 8년차 이상이에요"
             isSelected={level === "Professional"}
-            onPress={()=>handleSelect("Professional")}
+            onPress={() => handleSelect("Professional")}
           />
         </View>
 
-        <SubmitButton
-          label="선택하기"
-          onPress={handleNext} 
-          disabled={!level}
-        />
+        <SubmitButton label="선택하기" onPress={handleNext} disabled={!level} />
       </View>
     </Screen>
   );
