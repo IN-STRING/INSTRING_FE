@@ -1,17 +1,17 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { Colors } from "@/constants/theme";
-import { Screen } from "@/components/screen";
+import { Screen } from "@/components/Screen";
 import { HumidityGauge } from "@/components/Humidity";
 import { ThermometerGauge } from "@/components/Thermometer";
 
+/**
+ * Renders the instrument status screen containing temperature, humidity, and instrument-string condition cards.
+ *
+ * @returns A React element representing the instrument dashboard screen with a header, ThermometerGauge, HumidityGauge, and a string-condition card including a segmented gauge and warning.
+ */
 export default function InstrumentDashboard() {
   return (
     <Screen variant="main">
@@ -37,7 +37,10 @@ export default function InstrumentDashboard() {
             <View style={[styles.triangle, { left: "90%" }]} />
             <View style={styles.stepBarContainer}>
               <View
-                style={[styles.stepBar, { backgroundColor: "#4CAF50", flex: 1 }]}
+                style={[
+                  styles.stepBar,
+                  { backgroundColor: "#4CAF50", flex: 1 },
+                ]}
               />
               <View
                 style={[
@@ -46,7 +49,10 @@ export default function InstrumentDashboard() {
                 ]}
               />
               <View
-                style={[styles.stepBar, { backgroundColor: "#F44336", flex: 1 }]}
+                style={[
+                  styles.stepBar,
+                  { backgroundColor: "#F44336", flex: 1 },
+                ]}
               />
             </View>
           </View>

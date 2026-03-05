@@ -1,12 +1,19 @@
 import { typography } from "@/assets/fonts/typography";
 import { SubmitButton } from "@/components/Button";
-import { Screen } from "@/components/screen";
+import { Screen } from "@/components/Screen";
 import CustomInput from "@/components/TextInput";
 import { Colors } from "@/constants/theme";
 import { useForm } from "@/hooks/useForm";
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 
+/**
+ * Screen component for the first step of password reset that collects an email and a verification code.
+ *
+ * Validates the email format, disables the "다음 단계" button until a valid email and a verification code are provided, and navigates to the step‑2 reset route when submitted.
+ *
+ * @returns The rendered React element for the password reset step-1 screen.
+ */
 export default function ResetPasswordStep1Screen() {
   const router = useRouter();
 
@@ -18,17 +25,19 @@ export default function ResetPasswordStep1Screen() {
       verify: "",
     },
     validate: (values) => {
-      const errors: any = {}
+      const errors: any = {};
 
-      if (!values.email || !EMAIL_REGEX.test(values.email)) {errors.email = "올바른 이메일 형식이 아닙니다"}
+      if (!values.email || !EMAIL_REGEX.test(values.email)) {
+        errors.email = "올바른 이메일 형식이 아닙니다";
+      }
       // if (!values.verify) {errors.verify = "인증번호를 입력해주세요"}
 
-      return errors
+      return errors;
     },
   });
 
   return (
-    <Screen variant="auth" title="비밀번호 초기화" showBack >
+    <Screen variant="auth" title="비밀번호 초기화" showBack>
       <View>
         <Text style={styles.text}>
           {`가입된 이메일을 입력한 후 비밀번호 초기화를 누르면 ${"\n"}입력하신 이메일로 가입하신 비밀번호를 초기화 합니다`}
@@ -59,17 +68,22 @@ export default function ResetPasswordStep1Screen() {
           keyboardType="numeric"
         />
       </View>
-      <SubmitButton 
+      <SubmitButton
         label="다음 단계"
         onPress={() => {
           router.push("/(auth)/reset-password/step2");
-        }} 
-        disabled={(JSON.stringify(form.errors) !== '{}') || !form.values.email || !form.values.verify ? true : false}
+        }}
+        disabled={
+          JSON.stringify(form.errors) !== "{}" ||
+          !form.values.email ||
+          !form.values.verify
+            ? true
+            : false
+        }
       />
     </Screen>
   );
 }
-
 
 const styles = StyleSheet.create({
   inputWrapper: {
@@ -107,4 +121,3 @@ const styles = StyleSheet.create({
     bottom: 45,
   },
 });
-

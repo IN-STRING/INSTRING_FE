@@ -1,13 +1,19 @@
 import { View, Text, StyleSheet } from "react-native";
 import { router } from "expo-router";
 import { Colors } from "@/constants/theme";
-import { Screen } from "@/components/screen";
+import { Screen } from "@/components/Screen";
 import { SubmitButton } from "@/components/Button";
 import { typography } from "@/assets/fonts/typography";
 import { Image } from "expo-image";
 
+/**
+ * Renders the intro screen for the survey with a title, subtitle, illustration, and a start button.
+ *
+ * The start button navigates to the "/(survey)/instrument" route when pressed.
+ *
+ * @returns The React element for the intro survey screen.
+ */
 export default function Intro() {
-
   const handleNext = () => {
     router.push("/(survey)/instrument");
   };
@@ -20,16 +26,13 @@ export default function Intro() {
 
         <View style={styles.wrapper}>
           <Image
-                  source={require("@/assets/images/survey/survey.svg")} 
-                  style={styles.image}
-                  contentFit="contain" 
-                />
+            source={require("@/assets/images/survey/survey.svg")}
+            style={styles.image}
+            contentFit="contain"
+          />
         </View>
 
-        <SubmitButton
-          label="설문 시작하기"
-          onPress={handleNext} 
-        />
+        <SubmitButton label="설문 시작하기" onPress={handleNext} />
       </View>
     </Screen>
   );

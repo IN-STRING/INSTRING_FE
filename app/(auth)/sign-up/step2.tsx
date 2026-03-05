@@ -1,16 +1,24 @@
 import { typography } from "@/assets/fonts/typography";
 import { SubmitButton } from "@/components/Button";
-import { Screen } from "@/components/screen";
+import { Screen } from "@/components/Screen";
 import CustomInput from "@/components/TextInput";
 import { Colors } from "@/constants/theme";
 import { useForm } from "@/hooks/useForm";
 import { useRouter } from "expo-router";
 import { StyleSheet, View } from "react-native";
 
+/**
+ * Renders the second step of the sign-up flow where the user sets and confirms their password.
+ *
+ * Validates that the password is at least 8 characters long and includes a letter, a digit, and a special character, and ensures the confirmation matches; submission is disabled until validation passes. On successful submission the navigation stack is dismissed and the user is taken to the sign-up success screen.
+ *
+ * @returns A React element representing the sign-up step 2 screen.
+ */
 export default function SignUpStep2Screen() {
   const router = useRouter();
 
-  const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+  const PASSWORD_REGEX =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
   const form = useForm({
     initialValues: {
@@ -18,22 +26,23 @@ export default function SignUpStep2Screen() {
       passwordConfirm: "",
     },
     validate: (values) => {
-      const errors: any = {}
+      const errors: any = {};
 
       // if (!values.email) errors.email = "아이디를 8자 이상으로 작성해 주세요"
-      if (!PASSWORD_REGEX.test(values.password)) errors.password = "영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다"
+      if (!PASSWORD_REGEX.test(values.password))
+        errors.password = "영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다";
 
       // if (!values.passwordConfirm) errors.passwordConfirm = "비밀번호 재확인 필수"
       if (values.password !== values.passwordConfirm) {
-        errors.passwordConfirm = "비밀번호가 다릅니다. 다시 입력해주세요"
+        errors.passwordConfirm = "비밀번호가 다릅니다. 다시 입력해주세요";
       }
 
-      return errors
+      return errors;
     },
   });
 
   return (
-    <Screen variant="auth" title="회원가입" showBack >
+    <Screen variant="auth" title="회원가입" showBack>
       <View style={styles.inputWrapper}>
         <CustomInput
           label="password"
@@ -64,15 +73,20 @@ export default function SignUpStep2Screen() {
       <SubmitButton
         label="회원가입"
         onPress={() => {
-          router.dismissAll()
-          router.replace("/(auth)/sign-up/success")
-        }} 
-        disabled={(JSON.stringify(form.errors) !== '{}') || !form.values.password || !form.values.passwordConfirm ? true : false}
+          router.dismissAll();
+          router.replace("/(auth)/sign-up/success");
+        }}
+        disabled={
+          JSON.stringify(form.errors) !== "{}" ||
+          !form.values.password ||
+          !form.values.passwordConfirm
+            ? true
+            : false
+        }
       />
     </Screen>
   );
 }
-
 
 const styles = StyleSheet.create({
   inputWrapper: {

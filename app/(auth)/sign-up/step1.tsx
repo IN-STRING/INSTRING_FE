@@ -1,12 +1,19 @@
 import { typography } from "@/assets/fonts/typography";
 import { SubmitButton } from "@/components/Button";
-import { Screen } from "@/components/screen";
+import { Screen } from "@/components/Screen";
 import CustomInput from "@/components/TextInput";
 import { Colors } from "@/constants/theme";
 import { useForm } from "@/hooks/useForm";
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 
+/**
+ * Renders the first sign-up screen with email and verification inputs, client-side email validation, and navigation to the next sign-up step.
+ *
+ * The screen informs the user that the provided email will be used for login and password recovery, provides inputs for email and verification code (with validation for email format), and includes a submit button that advances to step 2 only when there are no validation errors and both fields are filled.
+ *
+ * @returns The rendered SignUp Step 1 screen as a JSX element.
+ */
 export default function SignUpStep1Screen() {
   const router = useRouter();
 
@@ -18,17 +25,19 @@ export default function SignUpStep1Screen() {
       verify: "",
     },
     validate: (values) => {
-      const errors: any = {}
+      const errors: any = {};
 
-      if (!values.email || !EMAIL_REGEX.test(values.email)) {errors.email = "올바른 이메일 형식이 아닙니다"}
+      if (!values.email || !EMAIL_REGEX.test(values.email)) {
+        errors.email = "올바른 이메일 형식이 아닙니다";
+      }
       // if (!values.verify) {errors.verify = "인증번호를 입력해주세요"}
 
-      return errors
+      return errors;
     },
   });
 
   return (
-    <Screen variant="auth" title="회원가입" showBack >
+    <Screen variant="auth" title="회원가입" showBack>
       <View>
         <Text style={styles.text}>
           {`입력하신 이메일은 추후에 ${"\n"}로그인, 비밀번호 찾기에 사용됩니다.`}
@@ -59,17 +68,22 @@ export default function SignUpStep1Screen() {
           keyboardType="numeric"
         />
       </View>
-      <SubmitButton 
+      <SubmitButton
         label="다음 단계"
         onPress={() => {
           router.push("/(auth)/sign-up/step2");
-        }} 
-        disabled={(JSON.stringify(form.errors) !== '{}') || !form.values.email || !form.values.verify ? true : false}
+        }}
+        disabled={
+          JSON.stringify(form.errors) !== "{}" ||
+          !form.values.email ||
+          !form.values.verify
+            ? true
+            : false
+        }
       />
     </Screen>
   );
 }
-
 
 const styles = StyleSheet.create({
   inputWrapper: {
@@ -107,5 +121,3 @@ const styles = StyleSheet.create({
     bottom: 45,
   },
 });
-
-
