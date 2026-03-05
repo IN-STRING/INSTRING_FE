@@ -1,4 +1,4 @@
-import { Screen } from "@/components/screen";
+import { Screen } from "@/components/Screen";
 import { StyleSheet } from "react-native";
 import { Text, View } from "react-native";
 

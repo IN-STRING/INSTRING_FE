@@ -1,4 +1,4 @@
-import { Screen } from "@/components/screen";
+import { Screen } from "@/components/Screen";
 import { Success } from "@/components/Success";
 import { router } from "expo-router";
 
